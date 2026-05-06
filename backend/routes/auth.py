@@ -21,6 +21,7 @@ def register(body: RegisterRequest, db: Session = Depends(get_db)):
     place = PlaceOfWorship(
         name=body.place_name,
         religion=body.religion,
+        denomination=body.denomination,
         place_type=body.place_type,
         address=body.address,
         city=body.city,
