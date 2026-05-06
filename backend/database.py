@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import Session
 
 from models import Base, Country, Event, PlaceOfWorship, PrayerTime, User
@@ -24,7 +24,8 @@ def seed():
 
     # Simple migration: add denomination column if it doesn't exist
     try:
-        db.execute("ALTER TABLE places_of_worship ADD COLUMN denomination TEXT")
+        from sqlalchemy import text
+        db.execute(text("ALTER TABLE places_of_worship ADD COLUMN denomination TEXT"))
         db.commit()
     except Exception:
         pass # Already exists or table not created yet
