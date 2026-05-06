@@ -22,7 +22,14 @@ def seed():
     Base.metadata.create_all(bind=engine)
     db = Session(engine)
 
-    if db.query(Country).count() > 0:
+    # Simple migration: add denomination column if it doesn't exist
+    try:
+        db.execute("ALTER TABLE places_of_worship ADD COLUMN denomination TEXT")
+        db.commit()
+    except Exception:
+        pass # Already exists or table not created yet
+
+    if db.query(Country).count() > 30: # Use 30 to allow adding more countries
         db.close()
         return
 
@@ -32,7 +39,11 @@ def seed():
         ("EG", "Egypt"), ("TR", "Turkey"), ("NG", "Nigeria"), ("BR", "Brazil"),
         ("ID", "Indonesia"), ("PK", "Pakistan"), ("JP", "Japan"), ("KR", "South Korea"),
         ("DE", "Germany"), ("ES", "Spain"), ("TH", "Thailand"), ("RU", "Russia"),
-        ("CA", "Canada"),
+        ("CA", "Canada"), ("AU", "Australia"), ("IE", "Ireland"), ("NL", "Netherlands"),
+        ("ZA", "South Africa"), ("KE", "Kenya"), ("AE", "United Arab Emirates"),
+        ("MX", "Mexico"), ("MU", "Mauritius"), ("FI", "Finland"), ("SE", "Sweden"),
+        ("NO", "Norway"), ("DK", "Denmark"), ("GR", "Greece"), ("CH", "Switzerland"),
+        ("BE", "Belgium"), ("PT", "Portugal"), ("MY", "Malaysia"), ("SG", "Singapore"),
     ]
     for code, name in countries:
         db.add(Country(code=code, name=name))

@@ -10,6 +10,7 @@ class RegisterRequest(BaseModel):
     password: str
     place_name: str
     religion: str
+    denomination: str = ""
     place_type: str
     address: str = ""
     city: str = ""
@@ -85,6 +86,7 @@ class PlaceResponse(BaseModel):
     id: int
     name: str
     religion: str
+    denomination: Optional[str] = None
     place_type: str
     address: Optional[str] = None
     city: Optional[str] = None
@@ -107,6 +109,7 @@ class PlaceResponse(BaseModel):
 class PlaceUpdate(BaseModel):
     name: Optional[str] = None
     religion: Optional[str] = None
+    denomination: Optional[str] = None
     place_type: Optional[str] = None
     address: Optional[str] = None
     city: Optional[str] = None

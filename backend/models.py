@@ -35,6 +35,7 @@ class PlaceOfWorship(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String, nullable=False)
     religion = Column(String, nullable=False)
+    denomination = Column(String)
     place_type = Column(String, nullable=False)
     address = Column(String)
     city = Column(String)
