@@ -14,7 +14,11 @@ app = FastAPI(title="Global Places of Worship", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[
+        "http://localhost:5173",
+        "https://sacredspaces.world",
+        "https://sacred-spaces-app.netlify.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
